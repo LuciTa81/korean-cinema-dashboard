@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      name="description"
+      content="CGV, 롯데시네마, 메가박스 현재 상영작을 한눈에 보는 정적 웹사이트"
+    />
+    <title>한국 영화관 통합 상영작</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="header-inner">
+        <div>
+          <p class="eyebrow">CGV · 롯데시네마 · 메가박스</p>
+          <h1>한국 영화관 통합 상영작</h1>
+        </div>
+        <div class="updated-box" aria-live="polite">
+          <span class="updated-label">업데이트</span>
+          <strong id="updatedAt">불러오는 중</strong>
+        </div>
+      </div>
+    </header>
+
+    <main class="page">
+      <section class="toolbar" aria-label="영화 필터">
+        <div class="filter-group" role="group" aria-label="영화관 선택">
+          <button class="filter-button is-active" type="button" data-cinema="all">전체</button>
+          <button class="filter-button" type="button" data-cinema="cgv">CGV</button>
+          <button class="filter-button" type="button" data-cinema="lotte">롯데시네마</button>
+          <button class="filter-button" type="button" data-cinema="megabox">메가박스</button>
+        </div>
+        <label class="search-wrap">
+          <span class="visually-hidden">영화명 검색</span>
+          <input id="searchInput" type="search" placeholder="영화명 검색" autocomplete="off" />
+        </label>
+        <label class="sort-wrap">
+          <span class="visually-hidden">정렬</span>
+          <select id="sortSelect">
+            <option value="rank">영화관 순위순</option>
+            <option value="rate">예매율 높은순</option>
+            <option value="release">개봉일 최신순</option>
+            <option value="title">가나다순</option>
+          </select>
+        </label>
+      </section>
+
+      <section class="summary" aria-label="수집 요약">
+        <div class="summary-item">
+          <span>전체</span>
+          <strong id="totalCount">0</strong>
+        </div>
+        <div class="summary-item">
+          <span>CGV</span>
+          <strong id="cgvCount">0</strong>
+        </div>
+        <div class="summary-item">
+          <span>롯데시네마</span>
+          <strong id="lotteCount">0</strong>
+        </div>
+        <div class="summary-item">
+          <span>메가박스</span>
+          <strong id="megaboxCount">0</strong>
+        </div>
+      </section>
+
+      <div id="sourceAlerts" class="source-alerts" aria-live="polite"></div>
+
+      <section class="result-line" aria-live="polite">
+        <strong id="visibleCount">0</strong>
+        <span>개의 영화가 표시됩니다.</span>
+      </section>
+
+      <section id="movieGrid" class="movie-grid" aria-label="현재 상영작 목록"></section>
+
+      <section id="emptyState" class="empty-state" hidden>
+        <h2>표시할 영화가 없습니다</h2>
+        <p>검색어를 바꾸거나 다른 영화관 필터를 선택해 보세요.</p>
+      </section>
+    </main>
+
+    <template id="movieCardTemplate">
+      <article class="movie-card">
+        <a class="poster-link" target="_blank" rel="noreferrer">
+          <img class="poster" loading="lazy" alt="" />
+          <span class="poster-fallback">No Poster</span>
+        </a>
+        <div class="movie-body">
+          <div class="movie-topline">
+            <span class="cinema-badge"></span>
+            <span class="rank"></span>
+          </div>
+          <h2 class="movie-title"></h2>
+          <dl class="movie-meta">
+            <div>
+              <dt>예매율</dt>
+              <dd class="rate"></dd>
+            </div>
+            <div>
+              <dt>개봉일</dt>
+              <dd class="release"></dd>
+            </div>
+          </dl>
+        </div>
+      </article>
+    </template>
+
+    <script src="./app.js" defer></script>
+  </body>
+</html>
